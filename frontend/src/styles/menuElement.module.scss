@@ -1,0 +1,50 @@
+@use "../variables/colors" as *;
+@use "../variables/breakpoints" as *;
+
+.container {
+  .active {
+    background-color: $lightRed;
+  }
+  a {
+    p {
+      color: white;
+    }
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding: 1em;
+    border-radius: 1em;
+    margin: 1em;
+    transition: ease-in-out 0.4s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    &:hover {
+      background-color: $lightRed;
+    }
+  }
+}
+
+@media (max-width: $breakpoint2) {
+  .container {
+    a {
+      p {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint4) {
+  .container {
+    width: 100%;
+    a {
+      padding: auto;
+      margin: 0 auto;
+      justify-content: center;
+      Image {
+        margin: 0 auto;
+      }
+    }
+  }
+}

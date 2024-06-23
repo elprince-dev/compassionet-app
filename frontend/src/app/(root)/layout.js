@@ -1,0 +1,34 @@
+import { Roboto } from "next/font/google";
+import "../globals.css";
+import Header from "@/components/Header";
+import Menu from "@/components/Menu";
+import Suggestions from "@/components/Suggestions";
+import BottomBar from "@/components/BottomBar";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["100", "300", "400", "500", "700", "900"],
+});
+
+export const metadata = {
+  title: "CompassioNet",
+  description: "Share kindness",
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body className={roboto.className}>
+        <div className="container">
+          <Header />
+          <main className="dashboard">
+            <Menu />
+            {children}
+            <Suggestions />
+          </main>
+          <BottomBar />
+        </div>
+      </body>
+    </html>
+  );
+}

@@ -1,0 +1,21 @@
+@use "../variables/colors" as *;
+@use "../variables/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 17%;
+  background-color: $darkRed;
+}
+
+@media (max-width: $breakpoint2) {
+  .container {
+    width: 6em;
+  }
+}
+@media (max-width: $breakpoint4) {
+  .container {
+    display: none;
+  }
+}
