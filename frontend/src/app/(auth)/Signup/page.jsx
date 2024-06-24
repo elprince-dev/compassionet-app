@@ -16,25 +16,21 @@ const page = () => {
     email: "",
     password: "",
     confirm_password: "",
-    profile_pic: "",
+    profile_pic: null,
   };
 
   const { values, handleChange, handleSubmit, setFieldValue } = useFormik({
     initialValues: initialValues,
-    onSubmit: (values) => {
-      const formData = new FormData();
-      for (const key in values) {
-        formData.append(key, values[key]);
-      }
+    onSubmit: () => {
       setIsLoading(true);
 
-      console.log(values);
+      const formData = new FormData();
+      for (let key in values) {
+        formData.append(key, values[key]);
+      }
       fetch("http://127.0.0.1:8000/signup", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        body: formData
       }).then((r) => {
         setIsLoading(false);
         if (r.ok) {
@@ -57,11 +53,7 @@ const page = () => {
     <div className={styles.container}>
       <div className={styles.formContainer}>
         <h3>Create an Account</h3>
-        <form
-          className={styles.form}
-          onSubmit={handleSubmit}
-          encType="multipart/form-data"
-        >
+        <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.textInput}>
             {formFields.map((field) => {
               if (field.name === "profile_pic") {
