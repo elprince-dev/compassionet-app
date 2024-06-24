@@ -28,6 +28,7 @@
     border: 1px solid;
     padding: 1em;
     transition: 0.4s ease-in-out;
+    cursor: pointer;
     &:hover,
     &:focus {
       background: $off-white;
