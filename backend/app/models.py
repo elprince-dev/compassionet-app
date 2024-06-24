@@ -13,7 +13,7 @@ class User(Base):
     first_name = Column(String, nullable= False)
     last_name = Column(String, nullable= False)
     bio = Column(String, nullable=True)
-    profile_pic = Column(LargeBinary, nullable=True)
+    profile_pic = Column(String, nullable=True)
     created_at = Column(String, default=str(datetime.now()), nullable=False)
 
 class Post(Base):

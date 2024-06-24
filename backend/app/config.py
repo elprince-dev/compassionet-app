@@ -9,6 +9,8 @@ class Settings(BaseSettings):
     DB_NAME: str
     AWS_SECRET_ACCESS_KEY: str
     AWS_ACCESS_KEY_ID: str
+    AWS_REGION: str
+    S3_BUCKET_NAME: str
 
 settings = Settings()
 

@@ -9,6 +9,7 @@ sqlalchemy = "*"
 psycopg2 = "*"
 passlib = "*"
 boto3 = "*"
+python-multipart = "*"
 
 [dev-packages]
 
