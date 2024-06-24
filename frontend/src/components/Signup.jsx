@@ -48,7 +48,7 @@ const Signup = () => {
     setFieldValue("profile_pic", file);
   };
   return (
-    <div className={styles.signupContainer}>
+    <div className={styles.container}>
       <h3>Create an Account</h3>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.textInput}>

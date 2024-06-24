@@ -7,8 +7,8 @@ import Signin from "@/components/Signin";
 const page = () => {
   return (
     <div className={styles.container}>
-      <Signup />
       <Signin />
+      <Signup />
     </div>
   );
 };
