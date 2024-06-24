@@ -1,0 +1,94 @@
+@use "../variables/colors" as *;
+@use "../variables/breakpoints" as *;
+
+.signupContainer {
+  box-shadow: 10px 10px 20px rgba($blue, 0.2);
+  padding: 3em 2em;
+  h3 {
+    margin-bottom: 1em;
+    color: $off-white;
+    font-size: 2rem;
+    background-color: $lightRed;
+  }
+  background-color: $lightRed;
+  width: 50%;
+  margin-top: 5em;
+  border-radius: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  form {
+    background-color: $lightRed;
+    .textInput {
+      background-color: $lightRed;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .field {
+        background-color: $lightRed;
+        margin: 1em 0;
+        width: calc(100% / 2 - 1.5em);
+        input {
+          background-color: white;
+          width: 100%;
+          height: 3.3em;
+          outline: none;
+          border-radius: 0.8em;
+          border: 1px solid $lightRed;
+          padding-left: 1em;
+          box-shadow: 10px 10px 20px rgba($blue, 0.2);
+          &:focus {
+            border: 2px solid $blue;
+          }
+        }
+        label {
+          background-color: $lightRed;
+          display: block;
+          margin-bottom: 0.4em;
+          font-size: 1rem;
+          color: $off-white;
+        }
+        &:last-child {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          box-shadow: none;
+          label {
+            text-align: center;
+          }
+          input {
+            color: black;
+            display: inline-block;
+            text-align: center;
+          }
+        }
+      }
+    }
+    button {
+      background-color: $blue;
+      margin: 0 auto;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      padding: 0.5em;
+      color: $off-white;
+      font-weight: 600;
+      font-size: 1.1rem;
+      outline: none;
+      box-shadow: 10px 10px 20px rgba($blue, 0.2);
+      text-align: center;
+      width: 100%;
+      padding: 0.8em 0;
+      border: 2px solid $off-white;
+      border-radius: 0.8em;
+      transition: ease-in-out 0.5s;
+      &:hover {
+        color: $darkRed;
+        background-color: $off-white;
+      }
+    }
+  }
+}
