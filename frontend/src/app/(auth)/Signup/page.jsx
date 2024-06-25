@@ -2,12 +2,12 @@
 import React from "react";
 import styles from "./page.module.scss";
 import Signup from "@/components/Signup";
-import Signin from "@/components/Signin";
+import SigninDirecting from "@/components/SigninDirecting";
 
 const page = () => {
   return (
     <div className={styles.container}>
-      <Signin />
+      <SigninDirecting />
       <Signup />
     </div>
   );

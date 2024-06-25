@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "../styles/signin.module.scss";
+import styles from "../styles/signinDirecting.module.scss";
 
-const Signin = () => {
+const SigninDirecting = () => {
   return (
     <>
       <div className={styles.container}>
@@ -34,4 +34,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default SigninDirecting;
