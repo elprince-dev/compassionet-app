@@ -7,9 +7,10 @@ import { useState } from "react";
 const Signup = () => {
   const [error, setError] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSubmited, setIsSubmited] = useState(false);
 
   // Construct the dynamic URL using environment variables
-  const baseURL = process.env.API_URL;
+  const baseURL = process.env.NEXT_PUBLIC_API_URL;
   const endpoint = "/signup";
   const url = `${baseURL}${endpoint}`;
 
@@ -38,8 +39,8 @@ const Signup = () => {
       }).then((r) => {
         setIsLoading(false);
         if (r.ok) {
-          r.json().then((user) => {
-            console.log(user);
+          r.json().then((data) => {
+            setIsSubmited(true);
           });
         } else {
           r.json().then((err) => setError(err.error));
@@ -86,6 +87,12 @@ const Signup = () => {
           })}
         </div>
         <button type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
+        {isSubmited ? (
+          <p>
+            Account is created successfully. You will be directed to the sign in
+            page
+          </p>
+        ) : null}
       </form>
     </div>
   );
