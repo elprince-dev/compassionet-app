@@ -8,6 +8,11 @@ const Signup = () => {
   const [error, setError] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  // Construct the dynamic URL using environment variables
+  const baseURL = process.env.API_URL;
+  const endpoint = "/signup";
+  const url = `${baseURL}${endpoint}`;
+
   const initialValues = {
     first_name: "",
     last_name: "",
@@ -27,7 +32,7 @@ const Signup = () => {
       for (let key in values) {
         formData.append(key, values[key]);
       }
-      fetch("http://127.0.0.1:8000/signup", {
+      fetch(url, {
         method: "POST",
         body: formData,
       }).then((r) => {
