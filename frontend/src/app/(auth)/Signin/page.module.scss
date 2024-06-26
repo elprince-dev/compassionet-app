@@ -1,0 +1,74 @@
+@use "../../../variables/colors" as *;
+@use "../../../variables/breakpoints.scss" as *;
+
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  .gradient {
+    position: absolute;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(120, 0, 0);
+    background: linear-gradient(
+      90deg,
+      rgba(120, 0, 0, 1) 0%,
+      rgba(120, 0, 0, 1) 17%,
+      rgba(120, 0, 0, 0.12377450980392157) 82%
+    );
+  }
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 10%;
+    gap: 3em;
+    align-items: center;
+    position: relative;
+    width: 50%;
+    height: 100%;
+    z-index: 2;
+    border: solid 1px blue;
+    h3 {
+      font-size: 3rem;
+      color: $off-white;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5em;
+      width: 60%;
+      .field {
+        display: flex;
+        flex-direction: column;
+        input {
+          background-color: rgba($lightRed, 0.2);
+          outline: none;
+          border: none;
+          border-radius: 10px;
+          height: 4em;
+          width: 100%;
+          padding-left: 2em;
+          color: $off-white;
+          &::placeholder {
+            color: rgba($off-white, 0.7);
+          }
+        }
+        label {
+          display: block;
+          margin-bottom: 0.4em;
+          font-size: 1rem;
+          color: $off-white;
+        }
+      }
+      button {
+        width: 10em;
+        height: 3.5em;
+        background-color: $off-white;
+        border-radius: 30px;
+      }
+    }
+  }
+}
