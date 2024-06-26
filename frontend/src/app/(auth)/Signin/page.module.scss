@@ -61,13 +61,27 @@
           margin-bottom: 0.4em;
           font-size: 1rem;
           color: $off-white;
+          font-weight: 500;
+          font-size: 1.1rem;
         }
       }
       button {
         width: 10em;
         height: 3.5em;
-        background-color: $off-white;
+        background-color: rgba($lightRed, 0.2);
         border-radius: 30px;
+        margin: 0 auto;
+        color: $off-white;
+        border: 1px solid $off-white;
+        font-size: 1.15rem;
+        font-weight: 600;
+        transition: ease-in-out 0.5s;
+        cursor: pointer;
+        &:hover,
+        &:focus {
+          background-color: rgba($off-white, 1);
+          color: $darkRed;
+        }
       }
     }
   }
