@@ -4,14 +4,17 @@ import styles from "./page.module.scss";
 import Background from "@/components/Background";
 import { useFormik } from "formik";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const [error, setError] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmited, setIsSubmited] = useState(false);
 
+  const router = useRouter();
+
   const baseURL = process.env.NEXT_PUBLIC_API_URL;
-  const endpoint = "/";
+  const endpoint = "/signin";
   const url = `${baseURL}${endpoint}`;
 
   const initialValues = {
@@ -22,17 +25,26 @@ const page = () => {
     initialValues: initialValues,
     onSubmit: () => {
       setIsLoading(true);
+      const formData = new FormData();
+
+      formData.append("username", values.email);
+      formData.append("password", values.password);
+
       fetch(url, {
-        method: "GET",
-        body: JSON.stringify(values),
+        method: "POST",
+        body: formData,
       }).then((r) => {
         setIsLoading(false);
         if (r.ok) {
           r.json().then((data) => {
             setIsSubmited(true);
+            router.push("/");
           });
         } else {
-          r.json().then((err) => setError(err.error));
+          r.json().then((err) => {
+            setError(err.error);
+            console.log(error);
+          });
         }
       });
     },
@@ -45,7 +57,7 @@ const page = () => {
       <div className={styles.gradient}></div>
       <div className={styles.formContainer}>
         <h3>Sign in to CompassioNet</h3>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.field}>
             <label htmlFor="email">Email :</label>
             <input

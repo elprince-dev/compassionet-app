@@ -12,11 +12,12 @@ router = APIRouter(
     tags=['Authintication'],
     )
 
-@router.get('/signin', response_model = Token)
+@router.post('/signin', response_model = Token)
 async def signin(user_credentials: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     # OAuth2PasswordRequestForm has username and password fields
     # When sending a request using postman, the username and password are sent as form-data
-    user = db.query(User).filter(User.email == user_credentials.email).first()
+    print(user_credentials)
+    user = db.query(User).filter(User.email == user_credentials.username).first()
     if not user:
         raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = 'User not found')
     if not verify(user_credentials.password, user.password):
