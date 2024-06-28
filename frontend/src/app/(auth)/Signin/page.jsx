@@ -10,6 +10,10 @@ const page = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmited, setIsSubmited] = useState(false);
 
+  const baseURL = process.env.NEXT_PUBLIC_API_URL;
+  const endpoint = "/";
+  const url = `${baseURL}${endpoint}`;
+
   const initialValues = {
     email: "",
     password: "",
@@ -40,7 +44,7 @@ const page = () => {
 
       <div className={styles.gradient}></div>
       <div className={styles.formContainer}>
-        <h3>Sign in now</h3>
+        <h3>Sign in to CompassioNet</h3>
         <form className={styles.form}>
           <div className={styles.field}>
             <label htmlFor="email">Email :</label>

@@ -15,3 +15,10 @@ class UserCreateInput(UserCreateResponse):
     confirm_password: str
     profile_pic: Optional[UploadFile] = File(None)
 
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    id: int
+
