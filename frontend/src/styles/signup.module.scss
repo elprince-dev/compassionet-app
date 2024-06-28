@@ -3,6 +3,7 @@
 
 .container {
   //   box-shadow: 10px 10px 20px rgba($blue, 0.2);
+  background: linear-gradient(to left, rgba($lightRed, 1), rgba($lightRed, 0));
   padding: 3em 10em;
   width: 55%;
   height: 100%;
@@ -10,21 +11,21 @@
     margin-bottom: 1em;
     color: $off-white;
     font-size: 2rem;
-    background-color: $lightRed;
+    // background-color: $lightRed;
   }
-  background-color: $lightRed;
+  // background-color: $lightRed;
   display: flex;
   flex-direction: column;
   align-items: center;
   form {
-    background-color: $lightRed;
+    // background-color: $lightRed;
     .textInput {
-      background-color: $lightRed;
+      // background-color: $lightRed;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       .field {
-        background-color: $lightRed;
+        // background-color: $lightRed;
         margin: 1em 0;
         width: calc(100% / 2 - 1.5em);
         input {
@@ -35,13 +36,19 @@
           border-radius: 0.8em;
           border: 1px solid $lightRed;
           padding-left: 1em;
-          box-shadow: 10px 10px 20px rgba($blue, 0.2);
+          // box-shadow: 10px 10px 20px rgba($blue, 0.2);
+          background-color: rgba($blue, 0.2);
+          border-color: $off-white;
+          border-radius: 10px;
           &:focus {
-            border: 2px solid $blue;
+            border: 2px solid $lightRed;
+          }
+          &::placeholder {
+            color: rgba($off-white, 0.7);
           }
         }
         label {
-          background-color: $lightRed;
+          // background-color: $lightRed;
           display: block;
           margin-bottom: 0.4em;
           font-size: 1rem;
