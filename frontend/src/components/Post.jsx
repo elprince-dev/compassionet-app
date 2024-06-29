@@ -1,10 +1,11 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import styles from "../styles/post.module.scss";
 import Image from "next/image";
 
 const Post = () => {
-
-
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleDropdown = () => setIsOpen(!isOpen);
   function getCurrentDate() {
     let currentDateTime = new Date();
     let day = currentDateTime.getDate();
@@ -33,8 +34,18 @@ const Post = () => {
           <h4 className={styles.username}>Mohamed Hussein</h4>
           <div className={styles.time}>{getCurrentDate()}</div>
         </div>
-        {/* Options */}
-        <button type="button">Options</button>
+        {/* dropdown */}
+        <div className={styles.dropdown}>
+          <div className={styles.dropdownToggle} onClick={toggleDropdown}>
+            <Image src="/dropDown.svg" width={30} height={30} alt="dropdown" />
+          </div>
+          {isOpen && (
+            <div className={`${styles.dropdownMenu} ${isOpen ? "show" : ""}`}>
+              <a href="#">Delete</a>
+              <a href="#">Edit</a>
+            </div>
+          )}
+        </div>
       </div>
       {/* Post Content */}
       <div className={styles.content}>Post Content</div>
