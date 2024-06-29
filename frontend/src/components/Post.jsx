@@ -48,7 +48,17 @@ const Post = () => {
         </div>
       </div>
       {/* Post Content */}
-      <div className={styles.content}>Post Content</div>
+      <div className={styles.content}>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium
+          autem facilis ex commodi enim? Necessitatibus enim laboriosam
+          cupiditate eaque dolor rerum numquam repellendus explicabo possimus
+          ratione, nostrum animi minima tempore.
+        </p>
+        <div className={styles.image} onClick={toggleDropdown}>
+          <img src="/user.jpg" alt="post image" />
+        </div>
+      </div>
       {/* Buttons */}
       <div className={styles.actions}>
         <div className={styles.like}>Like</div>
