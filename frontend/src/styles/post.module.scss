@@ -1,1 +1,28 @@
 @use "../variables/colors" as *;
+
+.container {
+  border: 3px solid black;
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em;
+    transition: ease-in-out 0.4s;
+    background-color: $lightRed;
+    color: white;
+    .user {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+      .image {
+        border-radius: 50%;
+        overflow: hidden;
+        height: 50px;
+        width: 50px;
+      }
+      .username {
+        color: $off-white;
+      }
+    }
+  }
+}

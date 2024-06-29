@@ -1,5 +1,8 @@
 @use "../variables/colors" as *;
 
-.container {
-  width: 60%;
+.feed {
+  width: 80%;
+  background-color: aqua;
+  border: 5 solid black;
+  margin: 1em auto;
 }

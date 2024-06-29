@@ -1,0 +1,7 @@
+@use "../variables/colors" as *;
+@use "../variables/breakpoints" as *;
+
+.container {
+  margin-bottom: 1em;
+  border: 3px solid black;
+}

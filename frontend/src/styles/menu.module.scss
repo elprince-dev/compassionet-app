@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: 17%;
-  background-color: $darkRed;
+  background-color: rgba($darkRed, 0.7);
 }
 
 @media (max-width: $breakpoint2) {

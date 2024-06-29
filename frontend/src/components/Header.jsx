@@ -14,7 +14,7 @@ const Header = () => {
             src="/user.jpg"
             width={50}
             height={50}
-            alt="Picture of the author"
+            alt="Picture of the user"
           />
         </div>
         <div className={styles.name}>

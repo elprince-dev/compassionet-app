@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Menu from "@/components/Menu";
 import Suggestions from "@/components/Suggestions";
 import BottomBar from "@/components/BottomBar";
+import Background from "@/components/Background";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -22,6 +23,10 @@ export default function RootLayout({ children }) {
         <div className="container">
           <Header />
           <main className="dashboard">
+            <div className="background">
+              <Background />
+            </div>
+
             <Menu />
             {children}
             <Suggestions />
