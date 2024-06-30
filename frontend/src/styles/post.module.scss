@@ -111,10 +111,9 @@
       -webkit-user-select: none;
       touch-action: manipulation;
 
-      // &:hover {
-      //   background-color: $lightRed;
-      //   color: $off-white;
-      // }
+      &:hover {
+        scale: 1.05;
+      }
 
       &::before {
         content: "";
