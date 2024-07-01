@@ -1,6 +1,6 @@
 @use "../variables/colors" as *;
 .container {
-  color: white;
+  color: $off-white;
   width: 100%;
   height: 4em;
   background-color: rgba($darkRed, 0.7);

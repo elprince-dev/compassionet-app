@@ -62,8 +62,9 @@ const Post = () => {
       {/* Buttons */}
       <div className={styles.actions}>
         <button className={styles.like}>Like</button>
-        <button className={styles.iDidIt}>I did it</button>
+        <button className={styles.iDidIt}>I did it!</button>
         <button className={styles.iWillDoIt}>I will do it</button>
+        <button className={styles.iWillDoIt}>Share</button>
       </div>
       {/* Comments */}
       <div className={styles.comments}>

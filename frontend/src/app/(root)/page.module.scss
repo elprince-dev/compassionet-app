@@ -1,9 +1,7 @@
+@use "../../variables/colors" as *;
+@use "../../variables/breakpoints" as *;
 .container {
   width: 100%;
   position: relative;
-  background-color: rgba(blue, 0);
-    // .background {
-    //   // position: absolute;
-    //   z-index: 0;
-    // }
+  background-color: rgba($darkRed, 0.5);
 }
