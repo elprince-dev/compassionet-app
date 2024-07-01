@@ -89,6 +89,7 @@
     button {
       flex: 1;
       margin-top: 1em;
+      margin-bottom: 1em;
 
       // width: 10em;
       // height: 2.5em;
@@ -115,13 +116,31 @@
       user-select: none;
       &:hover,
       &:focus {
-        color: #ffffff;
+        color: $off-white;
         background: $lightRed;
         border: 1px solid $lightRed;
-        text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+        text-shadow: 0 0 5px $off-white, 0 0 10px $off-white,
+          0 0 20px $off-white;
         box-shadow: 0 0 5px $off-white, 0 0 20px $lightRed, 0 0 50px $lightRed,
           0 0 100px $lightRed;
       }
     }
+  }
+  .writeComment {
+    width: 100%;
+    background-color: rgba($lightRed, 0.2);
+          outline: none;
+          border: none;
+          border-radius: 10px;
+          height: 3em;
+          width: 100%;
+          padding-left: 2em;
+          color: $off-white;
+          &::placeholder {
+            color: rgba($off-white, 0.7);
+          }
+  }
+  .comments {
+    
   }
 }

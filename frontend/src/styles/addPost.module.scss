@@ -2,6 +2,33 @@
 @use "../variables/breakpoints" as *;
 
 .container {
+  padding: 1em;
+  border-radius: 1em;
   margin-bottom: 1em;
-  border: 3px solid black;
+  background-color: $darkRed;
+  // height: 10em;
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  .image {
+    border-radius: 50%;
+    overflow: hidden;
+    height: 50px;
+    width: 50px;
+  }
+  .writePost {
+    border: 3px solid black;
+    width: 100%;
+    background-color: rgba($lightRed, 0.2);
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    height: 3em;
+    width: 100%;
+    padding-left: 2em;
+    color: $off-white;
+    &::placeholder {
+      color: rgba($off-white, 0.7);
+    }
+  }
 }

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import styles from "../styles/post.module.scss";
 import Image from "next/image";
+import Comment from "./Comment";
 
 const Post = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -67,14 +68,16 @@ const Post = () => {
         <button className={styles.iWillDoIt}>Share</button>
       </div>
       {/* Comments */}
+      <input
+        className={styles.writeComment}
+        type="text"
+        placeholder="Write a comment ..."
+      />
       <div className={styles.comments}>
-        <div className={styles.comment}>
-          <div className={styles.user}>
-            <div className={styles.image}>User Image</div>
-            <div className={styles.username}>User Name</div>
-          </div>
-          <div className={styles.commentContent}>Comment Content</div>
-        </div>
+        <Comment />
+        <Comment />
+        <Comment />
+        <Comment />
       </div>
     </div>
   );
