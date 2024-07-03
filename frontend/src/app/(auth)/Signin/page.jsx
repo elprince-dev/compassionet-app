@@ -39,6 +39,8 @@ const page = () => {
           r.json().then((data) => {
             setIsSubmited(true);
             router.push("/");
+            // console.log(data);
+            localStorage.setItem("token", data.access_token);
           });
         } else {
           r.json().then((err) => {

@@ -22,3 +22,9 @@ class Token(BaseModel):
 class TokenData(BaseModel):
     id: int
 
+class UserResponse(BaseModel):
+    id: int
+    email: EmailStr
+    username: str
+    profile_pic: str
+

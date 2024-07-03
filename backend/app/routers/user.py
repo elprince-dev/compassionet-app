@@ -2,7 +2,7 @@ import boto3
 from botocore.exceptions import NoCredentialsError
 from ..config import settings
 from fastapi import Depends, FastAPI, HTTPException, status, APIRouter, UploadFile, File, Form
-from .. import models, schemas, utilities
+from .. import models, schemas, utilities, oauth2
 from ..database import get_db
 from sqlalchemy.orm import Session
 from typing import Optional
@@ -63,4 +63,8 @@ async def create_user(
     print(new_user)
 
     return new_user
+
+@router.get("/user/me", response_model=schemas.UserResponse)
+async def read_current_user(current_user: models.User = Depends(oauth2.get_current_user)):
+    return current_user
 

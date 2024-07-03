@@ -5,7 +5,7 @@
   padding: 1em;
   border-radius: 1em;
   margin-bottom: 1em;
-  background-color: $darkRed;
+  background-color: rgba($darkRed,0.7);
   // height: 10em;
   display: flex;
   align-items: center;
@@ -15,20 +15,47 @@
     overflow: hidden;
     height: 50px;
     width: 50px;
+    Image {
+    }
   }
   .writePost {
-    border: 3px solid black;
-    width: 100%;
-    background-color: rgba($lightRed, 0.2);
-    outline: none;
-    border: none;
-    border-radius: 10px;
-    height: 3em;
-    width: 100%;
-    padding-left: 2em;
-    color: $off-white;
-    &::placeholder {
-      color: rgba($off-white, 0.7);
+    flex-grow: 1;
+    input {
+      border: 3px solid black;
+      width: 100%;
+      background-color: rgba($lightRed, 0.2);
+      outline: none;
+      border: none;
+      border-radius: 10px;
+      height: 3em;
+      padding-left: 2em;
+      color: $off-white;
+      &::placeholder {
+        color: rgba($off-white, 0.7);
+      }
     }
+
+    button {
+      margin-top: 1em;
+      background: transparent;
+      outline: none;
+      border: 1px solid rgba($off-white,0.7);
+      border-radius: 0.5em;
+      cursor: pointer;
+      transition: 0.4s ease-in-out;
+      &:hover {
+        background-color: $lightRed;
+        border: 1px solid rgba($lightRed,0.7);
+      }
+      a {
+        padding: 0.3em;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        color: $off-white;
+        
+      }
+    }
+    
   }
 }

@@ -14,11 +14,15 @@ const AddPost = () => {
         />
       </div>
 
-      <input
-        className={styles.writePost}
-        type="text"
-        placeholder="Write a comment ..."
-      />
+      <div className={styles.writePost}>
+        <input type="text" placeholder="Write a comment ..." />
+        <button>
+          <a>
+            <Image src="/upload.svg" width={20} height={20} alt="Upload" />
+            <p>Add a photo </p>
+          </a>
+        </button>
+      </div>
     </div>
   );
 };
