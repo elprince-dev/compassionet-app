@@ -1,11 +1,17 @@
 @use "../variables/colors" as *;
 
 .feed {
-  width: 80%;
+  width: 60%;
   border: 5 solid black;
-  margin: 1em auto;
+  margin: 5em auto;
   // overflow-y: scroll;
   // max-height: calc(100vh - 5em);
   // height: 100vh;
   // position: absolute;
+
+  .posts {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+  }
 }

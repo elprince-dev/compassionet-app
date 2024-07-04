@@ -27,7 +27,6 @@ const Header = () => {
       })
       .then((data) => {
         setUser(data);
-        console.log(data);
       })
       .catch((err) => {
         setError("Failed to fetch user profile");

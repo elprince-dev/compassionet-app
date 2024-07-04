@@ -6,6 +6,7 @@ from .. import models, schemas, utilities, oauth2
 from ..database import get_db
 from sqlalchemy.orm import Session
 from typing import Optional
+from ..utilities import upload_to_s3
 
 router = APIRouter(
     tags=['Users'],
@@ -17,15 +18,7 @@ async def get_user():
 
 
 # Utility function to upload to S3
-def upload_to_s3(file: UploadFile):
-    s3 = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY, region_name=settings.AWS_REGION)
-    
-    try:
-        s3.upload_fileobj(file.file, settings.S3_BUCKET_NAME, file.filename)
-        file_url = f"https://{settings.S3_BUCKET_NAME}.s3.{settings.AWS_REGION}.amazonaws.com/{file.filename}"
-        return file_url
-    except NoCredentialsError:
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Could not upload file")
+
 
 @router.post('/signup', status_code = status.HTTP_201_CREATED)
 async def create_user(

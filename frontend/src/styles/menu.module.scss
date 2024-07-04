@@ -2,10 +2,15 @@
 @use "../variables/breakpoints" as *;
 
 .container {
+  position: absolute;
+  height: calc(100vh - 4em);
+  // width: 20%;
+  z-index: 1;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 20%;
+
   background-color: rgba($darkRed, 0.7);
 }
 

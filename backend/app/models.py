@@ -21,7 +21,7 @@ class Post(Base):
     
     id = Column(Integer, primary_key = True, nullable=False)
     content = Column(String, nullable=False)
-    image = Column(LargeBinary)
+    image = Column(String, nullable=True)
     created_at = Column(String, default=str(datetime.now()), nullable=False)
 
     user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
