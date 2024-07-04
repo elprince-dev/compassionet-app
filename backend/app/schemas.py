@@ -27,4 +27,8 @@ class UserResponse(BaseModel):
     email: EmailStr
     username: str
     profile_pic: str
+class PostResponse(BaseModel):
+    id: int
+    content: str
+    image: Optional[str] = None
 

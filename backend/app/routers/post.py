@@ -4,6 +4,8 @@ from sqlalchemy.orm import Session
 from ..database import get_db
 from .. import models, schemas, utilities, oauth2
 from ..utilities import upload_to_s3
+from typing import List
+
 
 
 router = APIRouter(
@@ -21,3 +23,8 @@ async def create_post(content: str = Form(...), image: Optional[UploadFile] = Fi
     db.commit()
     db.refresh(new_post)
     return new_post
+
+@router.get('/', response_model=List[schemas.PostResponse])
+async def read_posts(db: Session = Depends(get_db)):
+    posts = db.query(models.Post).order_by(models.Post.id.desc()).all()
+    return posts

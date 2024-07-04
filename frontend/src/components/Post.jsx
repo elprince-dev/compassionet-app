@@ -1,8 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/post.module.scss";
 import Image from "next/image";
 import Comment from "./Comment";
+
+
 
 const Post = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +21,9 @@ const Post = () => {
 
     return `${day}-${month}-${year}`;
   }
+
+
+
   return (
     <div className={styles.container}>
       {/* header */}
