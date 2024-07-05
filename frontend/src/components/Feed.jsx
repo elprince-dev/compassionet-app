@@ -35,13 +35,14 @@ const Feed = () => {
   useEffect(() => {
     fetchPosts(url);
   }, []);
+  console.log(posts);
   return (
     <div className={styles.feed}>
       <AddPost />
       <div className={styles.posts}>
-        <Post />
-        <Post />
-        <Post />
+        {posts.map((post) => (
+          <Post post={post} key={post.id} />
+        ))}
       </div>
     </div>
   );

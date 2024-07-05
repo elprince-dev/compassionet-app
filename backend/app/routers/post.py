@@ -5,7 +5,7 @@ from ..database import get_db
 from .. import models, schemas, utilities, oauth2
 from ..utilities import upload_to_s3
 from typing import List
-
+from sqlalchemy.orm import joinedload
 
 
 router = APIRouter(
@@ -26,5 +26,5 @@ async def create_post(content: str = Form(...), image: Optional[UploadFile] = Fi
 
 @router.get('/', response_model=List[schemas.PostResponse])
 async def read_posts(db: Session = Depends(get_db)):
-    posts = db.query(models.Post).order_by(models.Post.id.desc()).all()
+    posts = db.query(models.Post).options(joinedload(models.Post.owner)).order_by(models.Post.id.desc()).all()
     return posts

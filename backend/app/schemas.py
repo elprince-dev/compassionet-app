@@ -2,6 +2,7 @@ from pydantic import BaseModel, EmailStr
 # from datetime import datetime
 from typing import Optional
 from fastapi import UploadFile, File
+import datetime
 
 
 class UserCreateResponse(BaseModel):
@@ -27,8 +28,17 @@ class UserResponse(BaseModel):
     email: EmailStr
     username: str
     profile_pic: str
+
+class UserResponse(BaseModel):
+    username: str
+    email: EmailStr
+    first_name: str
+    last_name: str
+    profile_pic: Optional[str] = None
 class PostResponse(BaseModel):
     id: int
     content: str
     image: Optional[str] = None
+    created_at: datetime.datetime
+    owner: UserResponse
 
