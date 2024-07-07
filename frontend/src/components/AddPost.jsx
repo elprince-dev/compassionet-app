@@ -8,7 +8,7 @@ const baseURL = process.env.NEXT_PUBLIC_API_URL;
 const endpoint = "/posts/create_post";
 const url = `${baseURL}${endpoint}`;
 
-const AddPost = ({ onRefresh }) => {
+const AddPost = ({ onRefresh, currentUser }) => {
   const [error, setError] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmited, setIsSubmited] = useState(false);
@@ -74,7 +74,7 @@ const AddPost = ({ onRefresh }) => {
     <div className={styles.container}>
       <div className={styles.image}>
         <Image
-          src="/user.jpg"
+          src={currentUser.profile_pic}
           width={50}
           height={50}
           alt="Picture of the user"
