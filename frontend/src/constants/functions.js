@@ -32,6 +32,6 @@ export const fetchPosts = async (url) => {
     const data = await response.json();
     return data;
   } catch (err) {
-    throw new Error("Failed to fetch user profile");
+    throw new Error("Failed to fetch posts");
   }
 };

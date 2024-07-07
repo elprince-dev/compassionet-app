@@ -11,6 +11,7 @@ passlib = "*"
 boto3 = "*"
 python-multipart = "*"
 pyjwt = "*"
+alembic = "*"
 
 [dev-packages]
 

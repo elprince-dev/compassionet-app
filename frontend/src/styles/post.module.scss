@@ -87,6 +87,17 @@
     gap: 1%;
     // margin-top: 1em;
     button {
+      display: flex;
+      justify-content: space-evenly;
+
+      span {
+        background-color: $off-white;
+        color: $darkRed;
+        padding: 0 0.3em;
+        border-radius: 2em;
+        transition: 0.5s ease;
+
+      }
       flex: 1;
       margin-top: 1em;
       margin-bottom: 1em;
@@ -114,8 +125,7 @@
       border: 1px solid $off-white;
       transition: 0.5s ease;
       user-select: none;
-      &:hover,
-      &:focus {
+      &:hover, .active {
         color: $off-white;
         background: $lightRed;
         border: 1px solid $lightRed;
@@ -123,7 +133,15 @@
           0 0 20px $off-white;
         box-shadow: 0 0 5px $off-white, 0 0 20px $lightRed, 0 0 50px $lightRed,
           0 0 100px $lightRed;
+
+          span {
+            text-shadow: 0 0 5px $off-white, 0 0 10px $off-white,
+          0 0 20px $off-white;
+        box-shadow: 0 0 5px $off-white, 0 0 20px $lightRed, 0 0 50px $lightRed,
+          0 0 100px $lightRed;
+          }
       }
+      
     }
   }
   .writeComment {

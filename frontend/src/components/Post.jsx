@@ -6,8 +6,26 @@ import Comment from "./Comment";
 
 const Post = ({ post }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [count, SetCount] = useState({
+    like: 222,
+    iDidIt: 0,
+    iWillDoIt: 0,
+  });
+  console.log(post);
   const toggleDropdown = () => setIsOpen(!isOpen);
-  // console.log(post.owner);
+
+  const handleClick = (e) => {
+    if (e.target.id === "like") {
+      SetCount((prevState) => ({ ...prevState, like: prevState.like + 1 }));
+    } else if (e.target.id === "iDidIt") {
+      SetCount((prevState) => ({ ...prevState, iDidIt: prevState.iDidIt + 1 }));
+    } else if (e.target.id === "iWillDoIt") {
+      SetCount((prevState) => ({
+        ...prevState,
+        iWillDoIt: prevState.iWillDoIt + 1,
+      }));
+    }
+  };
   return (
     <div className={styles.container}>
       {/* header */}
@@ -48,10 +66,20 @@ const Post = ({ post }) => {
       </div>
       {/* Buttons */}
       <div className={styles.actions}>
-        <button className={styles.like}>Like</button>
-        <button className={styles.iDidIt}>I did it!</button>
-        <button className={styles.iWillDoIt}>I will do it</button>
-        <button className={styles.iWillDoIt}>Share</button>
+        <button className={styles.like} id="like" onClick={handleClick}>
+          Like<span>{count.like}</span>
+        </button>
+        <button className={styles.iDidIt} id="iDidIt" onClick={handleClick}>
+          I did it!<span>{count.iDidIt}</span>
+        </button>
+        <button
+          className={styles.iWillDoIt}
+          id="iWillDoIt"
+          onClick={handleClick}
+        >
+          I will do it<span>{count.iWillDoIt}</span>
+        </button>
+        <button className={styles.share}>Share</button>
       </div>
       {/* Comments */}
       <input

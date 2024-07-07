@@ -26,9 +26,23 @@ class Post(Base):
 
     user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     owner = relationship('User') #returns the owner attributes of the user who created the post
+    likes = Column(Integer, default=0)
 
 class Like(Base):
     __tablename__ = 'likes'
+    user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), primary_key =True)
+    post_id = Column(Integer, ForeignKey('posts.id', ondelete='CASCADE'), primary_key =True)
+    created_at = Column(String, default=str(datetime.now()), nullable=False)
+
+    # post = relationship('Post', back_populates='likes')
+
+class I_did_it(Base):
+    __tablename__ = 'i_did_it'
+    user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), primary_key =True)
+    post_id = Column(Integer, ForeignKey('posts.id', ondelete='CASCADE'), primary_key =True)
+    created_at = Column(String, default=str(datetime.now()), nullable=False)
+class I_will_do_it(Base):
+    __tablename__ = 'i_will_do_it'
     user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), primary_key =True)
     post_id = Column(Integer, ForeignKey('posts.id', ondelete='CASCADE'), primary_key =True)
     created_at = Column(String, default=str(datetime.now()), nullable=False)

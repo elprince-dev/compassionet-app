@@ -4,3 +4,4 @@ router = APIRouter(
     prefix='/likes',
     tags=['Likes'],
     )
+

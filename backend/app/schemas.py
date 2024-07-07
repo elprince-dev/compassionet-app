@@ -41,4 +41,4 @@ class PostResponse(BaseModel):
     image: Optional[str] = None
     created_at: datetime.datetime
     owner: UserResponse
-
+    likes: int

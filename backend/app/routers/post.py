@@ -28,3 +28,14 @@ async def create_post(content: str = Form(...), image: Optional[UploadFile] = Fi
 async def read_posts(db: Session = Depends(get_db)):
     posts = db.query(models.Post).options(joinedload(models.Post.owner)).order_by(models.Post.id.desc()).all()
     return posts
+
+@router.post('/{id}', response_model = schemas.PostResponse)
+async def like_post(id: int, db: Session = Depends(get_db)):
+    post = db.query(models.Post).filter(models.Post.id == id).first()
+    if not post:
+        raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = 'Post not found')
+    post.likes += 1
+    db.commit()
+    db.refresh(post)
+    return post
+    
