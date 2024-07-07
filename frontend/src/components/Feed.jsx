@@ -10,6 +10,11 @@ const Feed = () => {
   const endpoint = "/posts/";
   const url = `${baseURL}${endpoint}`;
 
+  const [refresh, setRefresh] = useState(false);
+  const triggerRefresh = () => {
+    setRefresh(!refresh);
+  };
+
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -18,11 +23,11 @@ const Feed = () => {
       setPosts(data);
     };
     getPosts();
-  }, []);
+  }, [refresh]);
 
   return (
     <div className={styles.feed}>
-      <AddPost />
+      <AddPost onRefresh={triggerRefresh} />
       <div className={styles.posts}>
         {posts.map((post) => (
           <Post post={post} key={post.id} />

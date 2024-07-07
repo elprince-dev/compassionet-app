@@ -7,7 +7,7 @@ import Comment from "./Comment";
 const Post = ({ post }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => setIsOpen(!isOpen);
-  console.log(post.owner.profile_pic);
+  // console.log(post.owner);
   return (
     <div className={styles.container}>
       {/* header */}
@@ -21,7 +21,9 @@ const Post = ({ post }) => {
               alt="Picture of the user"
             />
           </div>
-          <h4 className={styles.username}>Mohamed Hussein</h4>
+          <h4
+            className={styles.username}
+          >{`${post.owner.first_name} ${post.owner.last_name}`}</h4>
           <div className={styles.time}>{post.created_at}</div>
         </div>
         {/* dropdown */}
