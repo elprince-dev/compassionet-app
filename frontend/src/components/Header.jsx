@@ -10,31 +10,31 @@ const url = `${baseURL}${endpoint}`;
 
 const Header = () => {
   const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
   const fetchUserProfile = async (url) => {
     const token = localStorage.getItem("token");
-    fetch(url, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((r) => {
-        if (!r.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return r.json();
-      })
-      .then((data) => {
-        setUser(data);
-      })
-      .catch((err) => {
-        setError("Failed to fetch user profile");
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = response.json();
+      return data;
+    } catch (err) {
+      throw new Error("Failed to fetch user profile");
+    }
   };
 
   useEffect(() => {
-    fetchUserProfile(url);
+    const getUserProfile = async () => {  
+      const data = await fetchUserProfile(url);
+      setUser(data);
+    };
+    getUserProfile();
   }, []);
 
   return (
