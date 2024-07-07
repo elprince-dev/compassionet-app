@@ -30,11 +30,18 @@ async def read_posts(db: Session = Depends(get_db)):
     return posts
 
 @router.post('/{id}', response_model = schemas.PostResponse)
-async def like_post(id: int, db: Session = Depends(get_db)):
+async def like_post(id: int, db: Session = Depends(get_db), current_user: models.User = Depends(oauth2.get_current_user)):
     post = db.query(models.Post).filter(models.Post.id == id).first()
     if not post:
         raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = 'Post not found')
+    
+    # Update likes count in the Post table
     post.likes += 1
+
+    # Create a new Like record
+    like = models.Like(user_id = current_user.id, post_id = id)
+    db.add(like)
+    
     db.commit()
     db.refresh(post)
     return post
