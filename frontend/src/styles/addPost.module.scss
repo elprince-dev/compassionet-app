@@ -59,6 +59,15 @@
           
         }
       }
+      .addedImageName{
+        flex: auto;
+        margin-left: 1em;
+        color: rgba($off-white, 0.7);
+        width: 4em;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
       .post {
         height: 100%;
         width: 5em;
