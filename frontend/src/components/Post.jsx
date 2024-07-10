@@ -3,20 +3,32 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/post.module.scss";
 import Image from "next/image";
 import Comment from "./Comment";
+import { UpdateLikes } from "@/constants/functions";
 
 const Post = ({ post }) => {
+  const baseURL = process.env.NEXT_PUBLIC_API_URL;
+  const endpoint = "/posts/";
+  const url = `${baseURL}${endpoint}${post.id}`;
+  console.log(post.likes);
+
   const [isOpen, setIsOpen] = useState(false);
   const [count, SetCount] = useState({
-    like: 222,
+    like: post.likes,
     iDidIt: 0,
     iWillDoIt: 0,
   });
-  console.log(post);
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     if (e.target.id === "like") {
       SetCount((prevState) => ({ ...prevState, like: prevState.like + 1 }));
+
+      console.log("before update likes");
+      const Update = async () => {
+        UpdateLikes(url);
+      };
+      Update();
+      console.log("After update likes");
     } else if (e.target.id === "iDidIt") {
       SetCount((prevState) => ({ ...prevState, iDidIt: prevState.iDidIt + 1 }));
     } else if (e.target.id === "iWillDoIt") {
