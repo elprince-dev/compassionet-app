@@ -18,7 +18,7 @@ const AddPost = ({ onRefresh, currentUser }) => {
 
   const initialValues = {
     content: "",
-    image: null,
+    image: "",
   };
 
   const { values, handleChange, handleSubmit, setFieldValue } = useFormik({
@@ -52,13 +52,11 @@ const AddPost = ({ onRefresh, currentUser }) => {
       } catch (err) {
         throw new Error("Failed to add a post");
       }
-
       //resetting the form
       setFieldValue("content", "");
       setImageName("");
     },
   });
-
   const handleImageChange = (e) => {
     setFieldValue("image", e.target.files[0]);
     console.log("File change event:", e);

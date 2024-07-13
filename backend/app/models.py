@@ -83,10 +83,10 @@ class I_did_it(Base):
 
     #relationship with the owner of the I did it
     user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), primary_key =True)
-    owner = relationship('User', back_populates='I_did_its')
+    owner = relationship('User', back_populates='i_did_its')
 
     #relationship with post
-    post = relationship('Post', back_populates='I_did_its')
+    post = relationship('Post', back_populates='i_did_its')
     post_id = Column(Integer, ForeignKey('posts.id', ondelete='CASCADE'), primary_key =True)
 
 class I_will_do_it(Base):

@@ -10,6 +10,7 @@ const Post = ({ post }) => {
   const endpoint = "/posts/";
   const url = `${baseURL}${endpoint}${post.id}`;
   console.log(post.likes);
+  console.log(post);
 
   const [isOpen, setIsOpen] = useState(false);
   const [count, SetCount] = useState({

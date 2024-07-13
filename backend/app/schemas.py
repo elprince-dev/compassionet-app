@@ -23,11 +23,6 @@ class Token(BaseModel):
 class TokenData(BaseModel):
     id: int
 
-class UserResponse(BaseModel):
-    id: int
-    email: EmailStr
-    username: str
-    profile_pic: str
 
 class UserResponse(BaseModel):
     username: str
@@ -35,10 +30,19 @@ class UserResponse(BaseModel):
     first_name: str
     last_name: str
     profile_pic: Optional[str] = None
+    bio: Optional[str] = None
+    created_at: datetime.datetime
+
+    class Config:
+        from_attributes = True
 class PostResponse(BaseModel):
     id: int
     content: str
     image: Optional[str] = None
     created_at: datetime.datetime
     owner: UserResponse
-    likes: int
+    likes_count: int
+    is_like: bool
+
+    class Config:
+        from_attributes = True

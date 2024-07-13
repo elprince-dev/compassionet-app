@@ -24,10 +24,34 @@ async def create_post(content: str = Form(...), image: Optional[UploadFile] = Fi
     db.refresh(new_post)
     return new_post
 
-@router.get('/', response_model=List[schemas.PostResponse])
-async def read_posts(db: Session = Depends(get_db)):
+# response_model=List[schemas.PostResponse]
+@router.get('/',  response_model=List[schemas.PostResponse]
+)
+async def read_posts(db: Session = Depends(get_db), current_user: models.User = Depends(oauth2.get_current_user)):
     posts = db.query(models.Post).options(joinedload(models.Post.owner)).order_by(models.Post.id.desc()).all()
-    return posts
+
+    post_responses = []
+
+    for post in posts:
+        likes_count = db.query(models.Like).filter(models.Like.post_id == post.id).count()
+        is_like = db.query(models.Like).filter(models.Like.post_id == post.id, models.Like.user_id == current_user.id).first() is not None
+
+        #Serializing the owner to match the pydantic model format 
+        owner = schemas.UserResponse.from_orm(post.owner)
+
+
+        post_response = schemas.PostResponse(
+            id=post.id,
+            content=post.content,
+            image=post.image,
+            created_at=post.created_at,
+            owner=owner,
+            likes_count=likes_count,
+            is_like=is_like
+        )
+        post_responses.append(post_response)
+        print(post_responses)
+    return post_responses
 
 @router.post('/{id}')
 async def like_post(id: int, db: Session = Depends(get_db), current_user: models.User = Depends(oauth2.get_current_user)):
