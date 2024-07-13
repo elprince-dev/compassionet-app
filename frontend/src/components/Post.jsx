@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/post.module.scss";
 import Image from "next/image";
 import Comment from "./Comment";
-import { UpdateLikes } from "@/constants/functions";
+import { updateLikes } from "@/constants/functions";
 
 const Post = ({ post }) => {
   const baseURL = process.env.NEXT_PUBLIC_API_URL;
@@ -17,25 +17,32 @@ const Post = ({ post }) => {
     iDidIt: 0,
     iWillDoIt: 0,
   });
+  const [active, setActive] = useState({
+    like: false,
+    iDidIt: false,
+    iWillDoIt: false,
+  });
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleClick = async (e) => {
-    if (e.target.id === "like") {
-      SetCount((prevState) => ({ ...prevState, like: prevState.like + 1 }));
-
-      console.log("before update likes");
-      const Update = async () => {
-        UpdateLikes(url);
-      };
-      Update();
-      console.log("After update likes");
-    } else if (e.target.id === "iDidIt") {
-      SetCount((prevState) => ({ ...prevState, iDidIt: prevState.iDidIt + 1 }));
-    } else if (e.target.id === "iWillDoIt") {
-      SetCount((prevState) => ({
-        ...prevState,
-        iWillDoIt: prevState.iWillDoIt + 1,
-      }));
+    try {
+      if (e.target.id === "like") {
+        const result = await updateLikes(url);
+        result.message === "Post is liked" ? (active.like = true) : false;
+        SetCount((prevState) => ({ ...prevState, like: result.likes }));
+      } else if (e.target.id === "iDidIt") {
+        SetCount((prevState) => ({
+          ...prevState,
+          iDidIt: prevState.iDidIt + 1,
+        }));
+      } else if (e.target.id === "iWillDoIt") {
+        SetCount((prevState) => ({
+          ...prevState,
+          iWillDoIt: prevState.iWillDoIt + 1,
+        }));
+      }
+    } catch (error) {
+      console.error("Failed to like/unlike the post", error);
     }
   };
   return (
@@ -78,8 +85,13 @@ const Post = ({ post }) => {
       </div>
       {/* Buttons */}
       <div className={styles.actions}>
-        <button className={styles.like} id="like" onClick={handleClick}>
-          Like<span>{count.like}</span>
+        <button
+          className={`${styles.like} ${active.like ? styles.active : ""}`}
+          id="like"
+          onClick={handleClick}
+        >
+          Like
+          <span>{count.like}</span>
         </button>
         <button className={styles.iDidIt} id="iDidIt" onClick={handleClick}>
           I did it!<span>{count.iDidIt}</span>

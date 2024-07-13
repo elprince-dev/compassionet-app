@@ -38,21 +38,23 @@ export const fetchPosts = async (url) => {
   }
 };
 
-export const UpdateLikes = async (url) => {
+export const updateLikes = async (url) => {
   const token = localStorage.getItem("token");
   try {
     const response = await fetch(url, {
       method: "POST",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      throw new Error("Failed to like/unlike the post");
     }
     const data = await response.json();
-    console.log(data);
+    return data;
   } catch (err) {
-    throw new Error("Failed to update likes");
+    console.error("Error:", error);
+    throw error;
   }
 };

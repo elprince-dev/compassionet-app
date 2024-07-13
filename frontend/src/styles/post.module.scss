@@ -102,16 +102,6 @@
       margin-top: 1em;
       margin-bottom: 1em;
 
-      // width: 10em;
-      // height: 2.5em;
-      // outline: none;
-      // // background-color: $off-white;
-      // border: none;
-      // font-weight: 600;
-      // // color: $blue;
-      // transition: 0.4s ease-in-out;
-      // font-size: 1rem;
-
       padding: 10px 20px;
       text-transform: uppercase;
       border-radius: 8px;
@@ -125,7 +115,7 @@
       border: 1px solid $off-white;
       transition: 0.5s ease;
       user-select: none;
-      &:hover, .active {
+      &:hover, &.active {
         color: $off-white;
         background: $lightRed;
         border: 1px solid $lightRed;
