@@ -59,21 +59,24 @@ async def like_post(id: int, db: Session = Depends(get_db), current_user: models
     if not post:
         raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = 'Post not found')
     
+    #define like counts
+    likes_count = db.query(models.Like).filter(models.Like.post_id == id).count()
+    
     # Update likes count in the Post table
     like_row = db.query(models.Like).filter(models.Like.post_id == id, models.Like.user_id == current_user.id).first()
     if like_row:
         db.delete(like_row)
-        post.likes -= 1
+        likes_count -= 1
         db.commit()
         db.refresh(post)
         return {"message": "Post is unliked", "likes": post.likes}
 
-    post.likes += 1
+    likes_count += 1
     # Create a new Like record
     like = models.Like(user_id = current_user.id, post_id = id)
     db.add(like)
     db.commit()
     db.refresh(post)
     print(post)
-    return {"message": "Post is liked", "likes": post.likes}
+    return {"message": "Post is liked", "likes": likes_count}
     

@@ -9,17 +9,16 @@ const Post = ({ post }) => {
   const baseURL = process.env.NEXT_PUBLIC_API_URL;
   const endpoint = "/posts/";
   const url = `${baseURL}${endpoint}${post.id}`;
-  console.log(post.likes);
   console.log(post);
 
   const [isOpen, setIsOpen] = useState(false);
   const [count, SetCount] = useState({
-    like: post.likes,
+    like: post.likes_count,
     iDidIt: 0,
     iWillDoIt: 0,
   });
   const [active, setActive] = useState({
-    like: false,
+    like: post.is_like,
     iDidIt: false,
     iWillDoIt: false,
   });
