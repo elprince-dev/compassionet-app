@@ -28,7 +28,6 @@ const Feed = () => {
     const getUserProfile = async () => {
       const data = await fetchUserProfile(baseURL + "/user/me");
       setUser(data);
-      console.log(data);
     };
     getUserProfile();
   }, [refresh]);

@@ -9,7 +9,7 @@ const Post = ({ post }) => {
   const baseURL = process.env.NEXT_PUBLIC_API_URL;
   const endpoint = "/posts/";
   const url = `${baseURL}${endpoint}${post.id}`;
-  console.log(post);
+
 
   const [isOpen, setIsOpen] = useState(false);
   const [count, SetCount] = useState({
@@ -44,7 +44,7 @@ const Post = ({ post }) => {
         } else {
           setKey("like", false);
         }
-        
+
         SetCount((prevState) => ({ ...prevState, like: result.likes }));
       } else if (e.target.id === "iDidIt") {
         SetCount((prevState) => ({
