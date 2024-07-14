@@ -69,7 +69,7 @@ async def like_post(id: int, db: Session = Depends(get_db), current_user: models
         likes_count -= 1
         db.commit()
         db.refresh(post)
-        return {"message": "Post is unliked", "likes": post.likes}
+        return {"message": "Post is unliked", "likes": likes_count}
 
     likes_count += 1
     # Create a new Like record
