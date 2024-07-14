@@ -17,18 +17,34 @@ const Post = ({ post }) => {
     iDidIt: 0,
     iWillDoIt: 0,
   });
+
+  // setKey function
+
   const [active, setActive] = useState({
     like: post.is_like,
     iDidIt: false,
     iWillDoIt: false,
   });
+  let setKey = (key, bool) => {
+    setActive((prevActive) => ({
+      ...prevActive,
+      [key]: bool,
+    }));
+  };
+
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleClick = async (e) => {
     try {
       if (e.target.id === "like") {
         const result = await updateLikes(url);
-        result.message === "Post is liked" ? (active.like = true) : false;
+
+        if (result.message === "Post is liked") {
+          setKey("like", true);
+        } else {
+          setKey("like", false);
+        }
+        
         SetCount((prevState) => ({ ...prevState, like: result.likes }));
       } else if (e.target.id === "iDidIt") {
         SetCount((prevState) => ({
