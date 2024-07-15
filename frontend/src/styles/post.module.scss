@@ -96,7 +96,6 @@
         padding: 0 0.3em;
         border-radius: 2em;
         transition: 0.5s ease;
-
       }
       flex: 1;
       margin-top: 1em;
@@ -115,7 +114,8 @@
       border: 1px solid $off-white;
       transition: 0.5s ease;
       user-select: none;
-      &:hover, &.active {
+      &:hover,
+      &.active {
         color: $off-white;
         background: $lightRed;
         border: 1px solid $lightRed;
@@ -124,31 +124,51 @@
         box-shadow: 0 0 5px $off-white, 0 0 20px $lightRed, 0 0 50px $lightRed,
           0 0 100px $lightRed;
 
-          span {
-            text-shadow: 0 0 5px $off-white, 0 0 10px $off-white,
-          0 0 20px $off-white;
-        box-shadow: 0 0 5px $off-white, 0 0 20px $lightRed, 0 0 50px $lightRed,
-          0 0 100px $lightRed;
-          }
+        span {
+          text-shadow: 0 0 5px $off-white, 0 0 10px $off-white,
+            0 0 20px $off-white;
+          box-shadow: 0 0 5px $off-white, 0 0 20px $lightRed, 0 0 50px $lightRed,
+            0 0 100px $lightRed;
+        }
       }
-      
     }
   }
   .writeComment {
     width: 100%;
     background-color: rgba($lightRed, 0.2);
-          outline: none;
-          border: none;
-          border-radius: 10px;
-          height: 3em;
-          width: 100%;
-          padding-left: 2em;
-          color: $off-white;
-          &::placeholder {
-            color: rgba($off-white, 0.7);
-          }
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    height: 3em;
+    width: 100%;
+    padding-left: 2em;
+    color: $off-white;
+    &::placeholder {
+      color: rgba($off-white, 0.7);
+    }
   }
-  .comments {
-    
+  .addComment {
+    display: flex;
+    gap: 1%;
+    button {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: 500;
+      color: $darkRed;
+      background-color: $off-white;
+      text-shadow: none;
+      cursor: pointer;
+      box-shadow: transparent;
+      border: 1px solid rgba($off-white, 0.7);
+      transition: 0.5s ease;
+      user-select: none;
+      outline: none;
+      &:hover {
+        background-color: rgba($lightRed, 0.7);
+        border: 1px solid rgba($off-white, 0.7);
+        color: $off-white;
+      }
+    }
   }
 }

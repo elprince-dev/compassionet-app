@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/post.module.scss";
 import Image from "next/image";
 import Comment from "./Comment";
-import { updateLikes } from "@/constants/functions";
+import { updateLikes, addComment } from "@/constants/functions";
 
 const Post = ({ post }) => {
   const baseURL = process.env.NEXT_PUBLIC_API_URL;
@@ -50,6 +50,19 @@ const Post = ({ post }) => {
     } catch (error) {
       console.error("Failed to like/unlike the post", error);
     }
+  };
+
+  const [commentText, setCommentText] = useState("");
+  const handleComment = async (e) => {
+    e.preventDefault();
+    console.log(baseURL + "/comments/add_comment");
+    const result = await addComment(
+      baseURL + "/comments/add_comment",
+      commentText,
+      post.id
+    );
+    setCommentText("");
+    console.log(result);
   };
   return (
     <div className={styles.container}>
@@ -118,11 +131,18 @@ const Post = ({ post }) => {
         <button className={styles.share}>Share</button>
       </div>
       {/* Comments */}
-      <input
-        className={styles.writeComment}
-        type="text"
-        placeholder="Write a comment ..."
-      />
+      <form className={styles.addComment} onSubmit={handleComment}>
+        <input
+          className={styles.writeComment}
+          type="text"
+          name="comment"
+          value={commentText}
+          placeholder="Write a comment ..."
+          onChange={(e) => setCommentText(e.target.value)}
+        />
+        <button type="submit">comment</button>
+      </form>
+
       <div className={styles.comments}>
         <Comment />
         <Comment />

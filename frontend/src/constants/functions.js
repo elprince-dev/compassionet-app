@@ -58,3 +58,25 @@ export const updateLikes = async (url) => {
     throw error;
   }
 };
+
+export const addComment = async (url, comment, post_id) => {
+  const token = localStorage.getItem("token");
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ content: comment, post_id: post_id }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to add comment");
+    }
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error("Error:", err);
+    throw err;
+  }
+};
