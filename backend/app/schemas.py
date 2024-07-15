@@ -41,8 +41,12 @@ class PostResponse(BaseModel):
     image: Optional[str] = None
     created_at: datetime.datetime
     owner: UserResponse
-    likes_count: int
+    like_count: int
+    i_did_it_count: int
+    i_will_do_it_count: int
     is_like: bool
+    is_i_did_it: bool
+    is_i_will_do_it: bool
 
     class Config:
         from_attributes = True

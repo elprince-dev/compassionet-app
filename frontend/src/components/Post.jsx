@@ -10,7 +10,6 @@ const Post = ({ post }) => {
   const endpoint = "/posts/";
   const url = `${baseURL}${endpoint}${post.id}`;
 
-
   const [isOpen, setIsOpen] = useState(false);
   const [count, SetCount] = useState({
     like: post.likes_count,
@@ -36,27 +35,14 @@ const Post = ({ post }) => {
 
   const handleClick = async (e) => {
     try {
-      if (e.target.id === "like") {
-        const result = await updateLikes(url);
-
-        if (result.message === "Post is liked") {
-          setKey("like", true);
-        } else {
-          setKey("like", false);
-        }
-
-        SetCount((prevState) => ({ ...prevState, like: result.likes }));
-      } else if (e.target.id === "iDidIt") {
-        SetCount((prevState) => ({
-          ...prevState,
-          iDidIt: prevState.iDidIt + 1,
-        }));
-      } else if (e.target.id === "iWillDoIt") {
-        SetCount((prevState) => ({
-          ...prevState,
-          iWillDoIt: prevState.iWillDoIt + 1,
-        }));
+      const result = await updateLikes(url + "?action=" + e.target.id);
+      console.log(url + "?action=" + e.target.id);
+      if (result.message === "Post is actioned") {
+        setKey(e.target.id, true);
+      } else {
+        setKey(e.target.id, false);
       }
+      SetCount((prevState) => ({ ...prevState, [e.target.id]: result.actions }));
     } catch (error) {
       console.error("Failed to like/unlike the post", error);
     }
