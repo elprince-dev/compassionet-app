@@ -80,3 +80,19 @@ export const addComment = async (url, comment, post_id) => {
     throw err;
   }
 };
+
+export const fetchComments = async (url, post_id) => {
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch comments");
+    }
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error("Error:", err);
+    throw err;
+  }
+};

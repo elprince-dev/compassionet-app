@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/post.module.scss";
 import Image from "next/image";
 import Comment from "./Comment";
-import { updateLikes, addComment } from "@/constants/functions";
+import { updateLikes, addComment, fetchComments } from "@/constants/functions";
 
 const Post = ({ post }) => {
   const baseURL = process.env.NEXT_PUBLIC_API_URL;
@@ -24,7 +24,6 @@ const Post = ({ post }) => {
     iDidIt: post.is_i_did_it,
     iWillDoIt: post.is_i_will_do_it,
   });
-  console.log(post);
   let setKey = (key, bool) => {
     setActive((prevActive) => ({
       ...prevActive,
@@ -64,6 +63,24 @@ const Post = ({ post }) => {
     setCommentText("");
     console.log(result);
   };
+
+  const [comments, setComments] = useState([]);
+  useEffect(() => {
+    const fetchCommentsData = async () => {
+      try {
+        const fetchedComments = await fetchComments(
+          baseURL + "/comments/get_comments/" + post.id,
+          post.id
+        );
+        setComments(fetchedComments);
+        console.log(fetchedComments);
+      } catch (error) {
+        console.error("Failed to fetch comments:", error.message);
+      }
+    };
+
+    fetchCommentsData();
+  }, []);
   return (
     <div className={styles.container}>
       {/* header */}
