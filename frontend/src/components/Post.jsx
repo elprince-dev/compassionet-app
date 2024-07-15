@@ -21,9 +21,10 @@ const Post = ({ post }) => {
 
   const [active, setActive] = useState({
     like: post.is_like,
-    iDidIt: false,
-    iWillDoIt: false,
+    iDidIt: post.is_i_did_it,
+    iWillDoIt: post.is_i_will_do_it,
   });
+  console.log(post);
   let setKey = (key, bool) => {
     setActive((prevActive) => ({
       ...prevActive,
@@ -42,7 +43,10 @@ const Post = ({ post }) => {
       } else {
         setKey(e.target.id, false);
       }
-      SetCount((prevState) => ({ ...prevState, [e.target.id]: result.actions }));
+      SetCount((prevState) => ({
+        ...prevState,
+        [e.target.id]: result.actions,
+      }));
     } catch (error) {
       console.error("Failed to like/unlike the post", error);
     }
@@ -95,11 +99,17 @@ const Post = ({ post }) => {
           Like
           <span>{count.like}</span>
         </button>
-        <button className={styles.iDidIt} id="iDidIt" onClick={handleClick}>
+        <button
+          className={`${styles.iDidIt} ${active.iDidIt ? styles.active : ""}`}
+          id="iDidIt"
+          onClick={handleClick}
+        >
           I did it!<span>{count.iDidIt}</span>
         </button>
         <button
-          className={styles.iWillDoIt}
+          className={`${styles.iWillDoIt} ${
+            active.iWillDoIt ? styles.active : ""
+          }`}
           id="iWillDoIt"
           onClick={handleClick}
         >
