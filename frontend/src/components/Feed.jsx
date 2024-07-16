@@ -36,7 +36,7 @@ const Feed = () => {
     <div className={styles.feed}>
       <AddPost onRefresh={triggerRefresh} currentUser={user} />
       <div className={styles.posts}>
-        {posts.map((post) => (
+        {posts && posts.map((post) => (
           <Post post={post} key={post.id} />
         ))}
       </div>

@@ -60,6 +60,8 @@ class CommentResponse(BaseModel):
     post_id: int
     content: str
     user_id: int
+    created_at: str
+    owner: UserResponse
 
     class Config:
         from_attributes = True

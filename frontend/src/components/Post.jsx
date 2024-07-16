@@ -6,15 +6,17 @@ import Comment from "./Comment";
 import { updateLikes, addComment, fetchComments } from "@/constants/functions";
 
 const Post = ({ post }) => {
+  console.log("Post data:", post);
+
   const baseURL = process.env.NEXT_PUBLIC_API_URL;
   const endpoint = "/posts/";
   const url = `${baseURL}${endpoint}${post.id}`;
 
   const [isOpen, setIsOpen] = useState(false);
-  const [count, SetCount] = useState({
-    like: post.likes_count,
-    iDidIt: 0,
-    iWillDoIt: 0,
+  const [count, setCount] = useState({
+    like: post.like_count,
+    iDidIt: post.i_did_it_count,
+    iWillDoIt: post.i_will_do_it_count,
   });
 
   // setKey function
@@ -42,7 +44,7 @@ const Post = ({ post }) => {
       } else {
         setKey(e.target.id, false);
       }
-      SetCount((prevState) => ({
+      setCount((prevState) => ({
         ...prevState,
         [e.target.id]: result.actions,
       }));
@@ -61,26 +63,27 @@ const Post = ({ post }) => {
       post.id
     );
     setCommentText("");
-    console.log(result);
+    fetchCommentsData();
   };
 
   const [comments, setComments] = useState([]);
-  useEffect(() => {
-    const fetchCommentsData = async () => {
-      try {
-        const fetchedComments = await fetchComments(
-          baseURL + "/comments/get_comments/" + post.id,
-          post.id
-        );
-        setComments(fetchedComments);
-        console.log(fetchedComments);
-      } catch (error) {
-        console.error("Failed to fetch comments:", error.message);
-      }
-    };
 
+  const fetchCommentsData = async () => {
+    try {
+      const fetchedComments = await fetchComments(
+        baseURL + "/comments/get_comments/" + post.id,
+        post.id
+      );
+      setComments(fetchedComments);
+    } catch (error) {
+      console.error("Failed to fetch comments:", error.message);
+    }
+  };
+
+  useEffect(() => {
     fetchCommentsData();
   }, []);
+
   return (
     <div className={styles.container}>
       {/* header */}
@@ -161,10 +164,10 @@ const Post = ({ post }) => {
       </form>
 
       <div className={styles.comments}>
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
+        {comments &&
+          comments.map((comment) => (
+            <Comment commentData={comment} key={comment.id} />
+          ))}
       </div>
     </div>
   );

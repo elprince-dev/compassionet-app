@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, status
 from .. import models, oauth2, schemas
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from ..database import get_db
 from typing import List
 
@@ -25,5 +25,5 @@ async def add_comment(comment: schemas.CommentCreate, db: Session = Depends(get_
 
 @router.get('/get_comments/{post_id}', response_model=List[schemas.CommentResponse])
 async def get_comments(post_id: int, db: Session = Depends(get_db)):
-    comments = db.query(models.Comment).filter(models.Comment.post_id == post_id).all()
+    comments = db.query(models.Comment).options(joinedload(models.Comment.owner)).filter(models.Comment.post_id == post_id).order_by(models.Comment.created_at.desc()).all()
     return comments
