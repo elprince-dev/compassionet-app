@@ -6,8 +6,6 @@ import Comment from "./Comment";
 import { updateLikes, addComment, fetchComments } from "@/constants/functions";
 
 const Post = ({ post }) => {
-  console.log("Post data:", post);
-
   const baseURL = process.env.NEXT_PUBLIC_API_URL;
   const endpoint = "/posts/";
   const url = `${baseURL}${endpoint}${post.id}`;

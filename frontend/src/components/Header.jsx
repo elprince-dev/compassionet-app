@@ -3,6 +3,7 @@ import React from "react";
 import styles from "../styles/haeder.module.scss";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { fetchUserProfile } from "@/constants/functions";
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 const endpoint = "/user/me";
@@ -10,27 +11,9 @@ const url = `${baseURL}${endpoint}`;
 
 const Header = () => {
   const [user, setUser] = useState(null);
-  const fetchUserProfile = async (url) => {
-    const token = localStorage.getItem("token");
-    try {
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = response.json();
-      return data;
-    } catch (err) {
-      throw new Error("Failed to fetch user profile");
-    }
-  };
 
   useEffect(() => {
-    const getUserProfile = async () => {  
+    const getUserProfile = async () => {
       const data = await fetchUserProfile(url);
       setUser(data);
     };
