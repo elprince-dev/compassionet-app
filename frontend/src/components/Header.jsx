@@ -1,24 +1,28 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import styles from "../styles/haeder.module.scss";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { fetchUserProfile } from "@/constants/functions";
+import UserContext from "@/constants/userContext";
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 const endpoint = "/user/me";
 const url = `${baseURL}${endpoint}`;
 
 const Header = () => {
-  const [user, setUser] = useState(null);
+  const { user } = useContext(UserContext);
 
-  useEffect(() => {
-    const getUserProfile = async () => {
-      const data = await fetchUserProfile(url);
-      setUser(data);
-    };
-    getUserProfile();
-  }, []);
+  //the below lines are only used if UseContext is not used
+  // const [user, setUser] = useState(null);
+
+  // useEffect(() => {
+  //   const getUserProfile = async () => {
+  //     const data = await fetchUserProfile(url);
+  //     setUser(data);
+  //   };
+  //   getUserProfile();
+  // }, []);
 
   return (
     <div className={styles.container}>
