@@ -172,4 +172,20 @@
       }
     }
   }
+  .comments {
+    .loadMoreContainer {
+      // border-top: 2px solid rgba($off-white, 0.7);
+      .loadMore {
+        display: flex;
+        justify-content: center;
+        background: transparent;
+        color: rgba($off-white, 0.9);
+        outline: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.1rem;
+        margin: 1em auto;
+      }
+    }
+  }
 }

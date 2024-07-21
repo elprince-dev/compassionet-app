@@ -4,6 +4,8 @@ import styles from "../styles/post.module.scss";
 import Image from "next/image";
 import Comment from "./Comment";
 import { updateLikes, addComment, fetchComments } from "@/constants/functions";
+import { HiArrowDown } from "react-icons/hi";
+import { motion } from "framer-motion";
 
 const Post = ({ post }) => {
   const baseURL = process.env.NEXT_PUBLIC_API_URL;
@@ -52,6 +54,7 @@ const Post = ({ post }) => {
   };
 
   const [commentText, setCommentText] = useState("");
+
   const handleComment = async (e) => {
     e.preventDefault();
     console.log(baseURL + "/comments/add_comment");
@@ -64,7 +67,7 @@ const Post = ({ post }) => {
     fetchCommentsData();
   };
 
-  const [comments, setComments] = useState([]);
+  // Track the number of comments to display
 
   const fetchCommentsData = async () => {
     try {
@@ -76,6 +79,13 @@ const Post = ({ post }) => {
     } catch (error) {
       console.error("Failed to fetch comments:", error.message);
     }
+  };
+
+  const [comments, setComments] = useState([]);
+  const [visibleComments, setVisibleComments] = useState(5);
+
+  const loadMoreComments = () => {
+    setVisibleComments((prevVisibleComments) => prevVisibleComments + 5);
   };
 
   useEffect(() => {
@@ -163,9 +173,29 @@ const Post = ({ post }) => {
 
       <div className={styles.comments}>
         {comments &&
-          comments.map((comment) => (
-            <Comment commentData={comment} key={comment.id} />
-          ))}
+          comments
+            .slice(0, visibleComments)
+            .map((comment) => (
+              <Comment commentData={comment} key={comment.id} />
+            ))}
+
+        <div className={styles.loadMoreContainer}>
+          {visibleComments < comments.length && (
+            <motion.button
+              onClick={loadMoreComments}
+              className={styles.loadMore}
+              animate={{ y: [0, -10, 0] }}
+              transition={{
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 1,
+                ease: "easeInOut",
+              }}
+            >
+              <HiArrowDown size={30} />
+            </motion.button>
+          )}
+        </div>
       </div>
     </div>
   );
