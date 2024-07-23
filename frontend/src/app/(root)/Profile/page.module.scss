@@ -1,0 +1,25 @@
+@use "../../../variables/colors" as *;
+@use "../../../variables/breakpoints" as *;
+.profile {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  .profileContainer {
+    padding: 2em;
+    margin-top: 6em;
+    width: 50em;
+    height: 40em;
+    background-color: aqua;
+    .header {
+      .info {
+        .image {
+          border-radius: 50%;
+          overflow: hidden;
+          height: 90px;
+          width: 90px;
+        }
+      }
+    }
+  }
+}
