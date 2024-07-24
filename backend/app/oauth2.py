@@ -6,7 +6,7 @@ from .database import get_db
 from sqlalchemy.orm import Session
 from fastapi import Depends, HTTPException, status
 from .schemas import TokenData
-from .models import User
+from .models import User, BlacklistedToken
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="signin")
@@ -26,6 +26,12 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     credential_exception = HTTPException(status_code = status.HTTP_401_UNAUTHORIZED, detail = f'Could not validate credentials', headers = {'WWW-Authenticate': 'Bearer'})
 
     token_data = verify_access_token(token, credential_exception)
+
+     # Check if token is blacklisted
+    blacklisted_token = db.query(BlacklistedToken).filter(BlacklistedToken.token == token).first()
+    if blacklisted_token:
+        raise credentials_exception
+
     user = db.query(User).filter(User.id == token_data.id).first()
     return user
 

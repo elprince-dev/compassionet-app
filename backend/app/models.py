@@ -115,5 +115,10 @@ class Comment(Base):
     post = relationship('Post', back_populates='comments')
     post_id = Column(Integer, ForeignKey('posts.id', ondelete='CASCADE', onupdate='CASCADE'))
 
-    
+
+class BlacklistedToken(Base):
+    __tablename__ = 'blacklisted_tokens'
+    id = Column(Integer, primary_key=True, index=True)
+    token = Column(String, unique=True, index=True, nullable=False)
+    blacklisted_on = Column(String, default=str(datetime.now()), nullable=False)
 

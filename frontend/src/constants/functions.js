@@ -1,3 +1,4 @@
+import Router from "next/router";
 export const fetchUserProfile = async (url) => {
   const token = localStorage.getItem("token");
   try {
@@ -9,6 +10,10 @@ export const fetchUserProfile = async (url) => {
     });
     if (!response.ok) {
       throw new Error("Network response was not ok");
+    }
+    if (response.status === 401) {
+      Router.push("/Signup");
+      return null; // or handle as needed
     }
     const data = response.json();
     return data;
@@ -31,6 +36,10 @@ export const fetchPosts = async (url) => {
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
+    if (response.status === 401) {
+      Router.push("/Signup");
+      return null; // or handle as needed
+    }
     const data = await response.json();
     return data;
   } catch (err) {
@@ -50,6 +59,10 @@ export const updateLikes = async (url) => {
     });
     if (!response.ok) {
       throw new Error("Failed to like/unlike the post");
+    }
+    if (response.status === 401) {
+      Router.push("/Signup");
+      return null; // or handle as needed
     }
     const data = await response.json();
     return data;
@@ -73,6 +86,10 @@ export const addComment = async (url, comment, post_id) => {
     if (!response.ok) {
       throw new Error("Failed to add comment");
     }
+    if (response.status === 401) {
+      Router.push("/Signup");
+      return null; // or handle as needed
+    }
     const data = await response.json();
     return data;
   } catch (err) {
@@ -89,6 +106,10 @@ export const fetchComments = async (url, post_id) => {
     if (!response.ok) {
       throw new Error("Failed to fetch comments");
     }
+    if (response.status === 401) {
+      Router.push("/Signup");
+      return null; // or handle as needed
+    }
     const data = await response.json();
     return data;
   } catch (err) {
@@ -96,5 +117,3 @@ export const fetchComments = async (url, post_id) => {
     throw err;
   }
 };
-
-
