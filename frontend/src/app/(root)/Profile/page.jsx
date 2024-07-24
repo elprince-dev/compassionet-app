@@ -6,13 +6,16 @@ import Image from "next/image";
 import { FaRegCommentDots } from "react-icons/fa";
 import { LuListTodo } from "react-icons/lu";
 import { IoMdDoneAll } from "react-icons/io";
-import { fetchPostsByUser } from "@/constants/functions";
+import { fetchPosts } from "@/constants/functions";
 import Post from "@/components/Post";
 
 const page = () => {
   const { user } = useContext(UserContext);
+
   const [activeTab, setActiveTab] = useState("acts"); // Default active tab
-  const [myPosts, setMyPosts] = useState(null); // Default
+  const [myPosts, setMyPosts] = useState(null);
+  const [myTodoPosts, setMyTodoPosts] = useState(null);
+  const [myDonePosts, setMyDonePosts] = useState(null);
   const renderContent = () => {
     switch (activeTab) {
       case "acts":
@@ -23,22 +26,36 @@ const page = () => {
           </>
         );
       case "todo":
-        return <div>To Do Content</div>;
+        return (
+          <>
+            {myTodoPosts &&
+              myTodoPosts.map((post) => <Post post={post} key={post.id} />)}
+          </>
+        );
       case "done":
-        return <div>Done Content</div>;
+        return (
+          <>
+            {myDonePosts &&
+              myDonePosts.map((post) => <Post post={post} key={post.id} />)}
+          </>
+        );
       default:
         return null;
     }
   };
 
   const baseURL = process.env.NEXT_PUBLIC_API_URL;
-  const endpoint = `/posts/user/${user.id}`;
-  const url = `${baseURL}${endpoint}`;
 
   useEffect(() => {
     const getPosts = async () => {
-      const data = await fetchPostsByUser(url);
-      setMyPosts(data);
+      const data1 = await fetchPosts(baseURL + "/posts/all/user/");
+      const data2 = await fetchPosts(baseURL + "/posts/todo/user/");
+      const data3 = await fetchPosts(baseURL + "/posts/done/user/");
+      setMyPosts(data1);
+      setMyTodoPosts(data2);
+      setMyDonePosts(data3);
+      console.log("all posts:" + data1);
+      console.log("todo posts:" + data2);
     };
     getPosts();
   }, []);
