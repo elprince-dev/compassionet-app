@@ -2,15 +2,13 @@
 @use "../../../variables/breakpoints" as *;
 .profile {
   width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   .profileContainer {
     padding: 2em;
     margin-top: 6em;
     width: 50em;
-    height: 40em;
-    background-color: rgba($lightRed, 0.7);
+    background-color: rgba($darkRed, 0.8);
     border-radius: 3em;
     .header {
       .info {
@@ -77,6 +75,18 @@
           background-color: $off-white;
         }
       }
+      .active {
+        color: $darkRed;
+        background-color: $off-white;
+      }
+    }
+  }
+  .content {
+    margin-top: 3em;
+    .posts {
+      display: flex;
+      flex-direction: column;
+      gap: 3em;
     }
   }
 }

@@ -96,3 +96,24 @@ export const fetchComments = async (url, post_id) => {
     throw err;
   }
 };
+
+export const fetchPostsByUser = async (url) => {
+  const token = localStorage.getItem("token");
+  try {
+    console.log(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    throw new Error("Failed to fetch posts");
+  }
+};

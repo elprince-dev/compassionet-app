@@ -135,3 +135,40 @@ async def action_post(id: int, db: Session = Depends(get_db), current_user: mode
         print(post)
         return {"message": "Post is actioned", "actions": i_will_do_it_count}
     
+@router.get('/user/{id}',  response_model=List[schemas.PostResponse]
+)
+async def read_posts_by_user(db: Session = Depends(get_db), current_user: models.User = Depends(oauth2.get_current_user)):
+    posts = db.query(models.Post).filter(models.Post.user_id == current_user.id).options(joinedload(models.Post.owner)).order_by(models.Post.id.desc()).all()
+
+    post_responses = []
+
+    for post in posts:
+        like_count = db.query(models.Like).filter(models.Like.post_id == post.id).count()
+        is_like = db.query(models.Like).filter(models.Like.post_id == post.id, models.Like.user_id == current_user.id).first() is not None
+
+        i_did_it_count = db.query(models.I_did_it).filter(models.I_did_it.post_id == post.id).count()
+        is_i_did_it = db.query(models.I_did_it).filter(models.I_did_it.post_id == post.id, models.I_did_it.user_id == current_user.id).first() is not None
+
+        i_will_do_it_count = db.query(models.I_will_do_it).filter(models.I_will_do_it.post_id == post.id).count()
+        is_i_will_do_it = db.query(models.I_will_do_it).filter(models.I_will_do_it.post_id == post.id, models.I_will_do_it.user_id == current_user.id).first() is not None
+
+        #Serializing the owner to match the pydantic model format 
+        owner = schemas.UserResponse.from_orm(post.owner)
+
+
+        post_response = schemas.PostResponse(
+            id=post.id,
+            content=post.content,
+            image=post.image,
+            created_at=post.created_at,
+            owner=owner,
+            like_count=like_count,
+            i_did_it_count=i_did_it_count,
+            i_will_do_it_count=i_will_do_it_count,
+            is_like=is_like,
+            is_i_did_it=is_i_did_it,
+            is_i_will_do_it=is_i_will_do_it,         
+        )
+        post_responses.append(post_response)
+        print(post_responses)
+    return post_responses
